@@ -1,0 +1,6 @@
+build
+dist
+bundle.zip
+__pycache__
+.pytest_cache
+word_guesser.egg-info

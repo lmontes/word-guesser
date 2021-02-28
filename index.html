@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+    <title>Word guesser</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .badge {
+            font-size: 2em;
+            padding: 0.25em;
+            margin: 0.25em;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="jumbotron text-center bg-dark text-light">
+        <h1 class="display-4"><b>Word Guesser</b></h1>
+    </div>
+    <nav class="navbar navbar-expand-sm">
+        <form class="navbar-form d-flex justify-content-center w-100" role="search">
+            <div class="col-3">
+                <input id="letters" type="text" class="form-control form-control-lg border border-primary" placeholder="Type some letters">
+                </input>
+            </div>
+            <div class="col-1">
+                <select id="language" class="custom-select custom-select-lg border border-primary">
+                    <option value="spanish">Spanish</option>
+                    <option value="english">English</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <button id="send" type="button" class="btn btn-outline-primary btn-lg btn-block">
+                    Send
+                </button>
+            </div>
+        </form>
+    </nav>
+    <br>
+    <br>
+    <div class="row justify-content-center">
+      <div id="result" class="col-md-6 bg-light"></div>
+    </div>
+    <script>
+        var maxLetters = 12;
+        var letters = document.getElementById("letters");
+        var language = document.getElementById("language");
+        var sendButton = document.getElementById("send");
+        var result = document.getElementById("result");
+
+        function errorMessage(message, type) {
+            return `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                <strong>${message}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>`;
+        }
+
+        function getWords() {
+            sendButton.disabled = true;
+            result.innerHTML = `<div class="d-flex justify-content-center">
+                <div class="spinner-border text-primary text-center" role="status">
+                    <span class="sr-only">Computing</span>
+                </div>
+            </div>`;
+            
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+                if (request.readyState == XMLHttpRequest.DONE) {
+                    sendButton.disabled = false;
+
+                    if (request.status == 200) {
+                        var content = JSON.parse(request.responseText).words.map(
+                           (x) => `<span class="badge rounded-pill bg-primary text-light">${x.toUpperCase()}</span>`
+                        );
+
+                        if(content.length > 0)
+                            result.innerHTML = `<p class="text-center">${content.join("&nbsp;")}</p>`;
+                        else
+                            result.innerHTML = errorMessage("No results", "warning")
+                    } else {
+                        result.innerHTML = errorMessage(`${request.responseText}`, "danger");
+                    }
+                }
+            };
+
+            request.open("POST", "https://us-central1-lmontes.cloudfunctions.net/word-guesser");
+            request.setRequestHeader("Content-Type", "application/json");
+
+            var requestData = {
+                "letters": letters.value,
+                "language": language.value
+            }
+
+            request.send(JSON.stringify(requestData));
+        }
+
+        function keyPress(event) {
+            event.preventDefault();
+            if(event.key === "Enter")
+                getWords();
+            else if (event.key.toUpperCase() != event.key.toLowerCase() && letters.value.length < maxLetters)
+                letters.value = letters.value + event.key.toUpperCase();
+        }
+
+        letters.onkeypress = keyPress;
+        sendButton.onclick = getWords;
+    </script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+# To include data files in the package
+include WordGuesser/dictionaries/*

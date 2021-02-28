@@ -11,6 +11,8 @@ CORS_DOMAIN = os.getenv("CORS_DOMAIN", "*")
 
 
 def cloud_function(request):
+    # CORS support
+    # https://cloud.google.com/functions/docs/writing/http?hl=es-419#preflight_request
     if request.method == "OPTIONS":
         headers = {
             "Access-Control-Allow-Origin": CORS_DOMAIN,

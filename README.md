@@ -2,8 +2,6 @@
 
 This repository contains the source code of a Python 3 library that can guess words from a sequence of unordered letters. The library uses an internal dictionary to validate the words, at this moment supports only spanish and english languages.
 
-## 
-
 ## Web application
 
 To demonstrate the use of the library a simple web application has been created. This demo application can be tried in the [word-guesser web page](https://lmont.es/word-guesser). In the next image we can see a screen capture from the web application.

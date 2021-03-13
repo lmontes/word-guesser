@@ -52,3 +52,4 @@ python setup.py sdist bdist_wheel
 * [Google Cloud functions source code structure](https://cloud.google.com/functions/docs/writing?hl=en#structuring_source_code)
 * [Authoritative guide to CORS for REST APIs](https://www.moesif.com/blog/technical/cors/Authoritative-Guide-to-CORS-Cross-Origin-Resource-Sharing-for-REST-APIs/)
 * [Replace accent marks preserving special characters](https://stackoverflow.com/questions/29984925/replace-accent-marks-preserving-special-characters)
+* [Bootstrap 5.0 docs](https://getbootstrap.com/docs/5.0)

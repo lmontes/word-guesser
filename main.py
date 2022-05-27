@@ -41,11 +41,11 @@ def cloud_function(request):
         if len(letters) > MAX_LETTERS:
             return ("", 422, headers)
 
-        words = guessers[language].guess_words(letters, len(letters))
+        words = guessers[language].guess(letters)
         if len(words) > MAX_RESULTS:
             words = words[0:MAX_RESULTS]
 
-        return ({"words": words}, 200, headers)
+        return (words, 200, headers)
     except Exception as ex:
         print(ex)
         return (str(ex), 500, headers)

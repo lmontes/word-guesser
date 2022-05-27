@@ -39,7 +39,7 @@ const app = Vue.createApp({
                     self.loading = false;
 
                     if (request.status == 200) {
-                        self.words = JSON.parse(request.responseText).words.map((x) => x.toUpperCase());
+                        self.words = JSON.parse(request.responseText).map((x) => x.toUpperCase());
 
                         if(self.words.length == 0)
                             self.showErrorMessage("alert-warning", "No results");

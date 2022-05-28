@@ -1,4 +1,7 @@
 import os
+import json
+from flask import Response
+
 from WordGuesser import WordGuesser
 
 
@@ -45,7 +48,7 @@ def cloud_function(request):
         if len(words) > MAX_RESULTS:
             words = words[0:MAX_RESULTS]
 
-        return (words, 200, headers)
+        return Response(json.dumps(words), headers=headers)
     except Exception as ex:
         print(ex)
         return (str(ex), 500, headers)

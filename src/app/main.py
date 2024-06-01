@@ -8,7 +8,7 @@ from WordGuesser import WordGuesser
 guessers = {}
 
 
-MAX_LETTERS = int(os.getenv("MAX_LETTERS", 12))
+MAX_LETTERS = int(os.getenv("MAX_LETTERS", 10))
 MAX_RESULTS = int(os.getenv("MAX_RESULTS", 25))
 CORS_DOMAIN = os.getenv("CORS_DOMAIN", "*")
 

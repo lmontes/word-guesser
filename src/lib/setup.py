@@ -4,7 +4,7 @@ import setuptools
 
 setuptools.setup(
     name="word-guesser",
-    version="0.1.0",
+    version="0.2.0",
     author="lmontes",
     description="Guess words from unordered letters",
     long_description="",
@@ -17,5 +17,5 @@ setuptools.setup(
     ],
     packages=setuptools.find_packages(),
     include_package_data=True,
-    python_requires=">=3.6",
+    python_requires=">=3.8",
 )

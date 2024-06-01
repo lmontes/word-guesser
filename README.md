@@ -4,19 +4,19 @@ This repository contains the source code of a Python 3 library that can guess wo
 
 ## Web application
 
-To demonstrate the use of the library a simple web application has been created. This demo application can be tried in the [word-guesser web page](https://lmont.es/word-guesser). In the next image we can see a screen capture from the web application.
+To demonstrate the use of the library a [simple web application](src/web/) has been created. This demo application can be tried in the [word-guesser web page](https://lmont.es/word-guesser). In the next image we can see a screen capture from the web application.
 
 ![](images/screenshot.png)
 
-The application code is also located in this repository. The file  [index.html](index.html) contains all the frontend code.
+The application code is also located in this repository. The directory [src/web](src/web/) contains all the frontend code.
 
-The file [main.py](main.py) uses the library to implement a REST API that is used by the web application. That API is deployed as a [Cloud Function](https://cloud.google.com/functions) in [Google Cloud](https://cloud.google.com).
+The file [src/app/main.py](src/app/main.py) uses the library to implement a REST API that is used by the web application. That API is deployed as a [Cloud Function](https://cloud.google.com/functions) in [Google Cloud](https://cloud.google.com).
 
-In order to ease the deployment of the API as a cloud function the code can be packaged as a zip file. We can use the [create-zip.sh](create-zip.sh) script to do it. When this script is executed it creates a file called **bundle.zip** with all the necessary file structure.
+In order to ease the deployment of the API as a cloud function the code can be packaged as a zip file. We can use the command `make zip` to do it. When this command is executed it creates a file called **dist/bundle.zip** with all the necessary file structure.
 
 The tested cloud function configuration is:
 
-* **Runtime**: Python 3.8
+* **Runtime**: Python 3.11
 * **Memory**: 256 MiB
 * **Executed function**: cloud_function
 
@@ -29,21 +29,22 @@ pip install -r requirements-dev.txt
 ```
 
 ```bash
-$ pytest
+$ make test
 
-============================================================================== test session starts ===============================================================================
-platform linux -- Python 3.7.4, pytest-5.4.1, py-1.8.1, pluggy-0.13.1
-plugins: anyio-2.0.2
-collected 4 items                                                                                                                                                           
-tests/test_word_guesser.py ....                                                                                                                                            [100%]
+pytest test/
+=========================================== test session starts ============================================
+platform linux -- Python 3.9.5, pytest-8.2.1, pluggy-1.5.0
+rootdir: /home/lmontes/git/word-guesser
+collected 13 items                                                                                         
 
-=============================================================================== 4 passed in 0.67s ================================================================================
-```
+test/test_word_guesser.py .............                                                              [100%]
+
+============================================ 13 passed in 4.28s ============================================
 
 ### Build package word-guesser
 
 ```bash
-python setup.py sdist bdist_wheel
+make lib
 ```
 
 ## Useful links

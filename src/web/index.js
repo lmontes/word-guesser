@@ -1,7 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
-            maxLetters: 12,
+            maxLetters: 10,
             loading: false,
             letters: "",
             language: "spanish",

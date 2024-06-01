@@ -1,5 +1,5 @@
 import pytest
-from WordGuesser import WordGuesser
+from src.lib.WordGuesser import WordGuesser
 
 
 def test_load_supported_language():
@@ -15,9 +15,9 @@ def test_load_unsupported_language():
         WordGuesser("chinese")
 
 
-def test_normalize_word():
-    assert WordGuesser._normalize_word("AÑO") == "AÑO"     # Preserve Ñ
-    assert WordGuesser._normalize_word("ÁRBOL") == "ARBOL" # Remove accent
+def test_normalize_letters():
+    assert WordGuesser._normalize_letters("AÑO") == "AÑO"     # Preserve Ñ
+    assert WordGuesser._normalize_letters("ÁRBOL") == "ARBOL" # Remove accent
 
 
 def test_result():

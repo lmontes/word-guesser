@@ -40,6 +40,7 @@ collected 13 items
 test/test_word_guesser.py .............                                                              [100%]
 
 ============================================ 13 passed in 4.28s ============================================
+```
 
 ### Build package word-guesser
 

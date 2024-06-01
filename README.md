@@ -6,11 +6,11 @@ This repository contains the source code of a Python 3 library that can guess wo
 
 To demonstrate the use of the library a [simple web application](src/web/) has been created. This demo application can be tried in the [word-guesser web page](https://lmont.es/word-guesser). In the next image we can see a screen capture from the web application.
 
-![](images/screenshot.png)
+![](docs/images/screenshot.png)
 
 The application code is also located in this repository. The directory [src/web](src/web/) contains all the frontend code.
 
-The file [src/app/main.py](src/app/main.py) uses the library to implement a REST API that is used by the web application. That API is deployed as a [Cloud Function](https://cloud.google.com/functions) in [Google Cloud](https://cloud.google.com).
+The file [src/cloud_function/main.py](src/cloud_function/main.py) uses the library to implement a REST API that is used by the web application. That API is deployed as a [Cloud Function](https://cloud.google.com/functions) in [Google Cloud](https://cloud.google.com).
 
 In order to ease the deployment of the API as a cloud function the code can be packaged as a zip file. We can use the command `make zip` to do it. When this command is executed it creates a file called **dist/bundle.zip** with all the necessary file structure.
 
